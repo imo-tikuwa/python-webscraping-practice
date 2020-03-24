@@ -3,13 +3,12 @@ from bs4 import BeautifulSoup
 
 # beautifulsoup4を使ったスクレイピングの練習
 
-# Yahoo!天気・災害のページから全国の天気を取得
+# Yahoo!天気・災害のページから今日の全国の天気を取得
 response = request.urlopen('https://weather.yahoo.co.jp/weather/')
 soup = BeautifulSoup(response, 'html.parser')
 response.close()
 
 # 地図内の地域を1つずつ取得
-results = []
 for li in soup.find_all('li', class_ = 'point'):
     # 地域名
     area = li.find('dt', class_ = 'name').text
@@ -24,6 +23,7 @@ for li in soup.find_all('li', class_ = 'point'):
 
     # 結果を出力
     print(area, weather, high_temp, low_temp, rainy_percent)
+
 
 # 札幌 曇り 6 1 50%
 # 釧路 曇り 8 0 50%
