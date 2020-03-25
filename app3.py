@@ -1,6 +1,9 @@
 from urllib import request
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 # beautifulsoup4とseleniumを使ったスクレイピングの練習
@@ -43,12 +46,20 @@ driver.get('https://weather.yahoo.co.jp/weather/')
 print_weather(driver.page_source)
 
 # 地図上部に表示されている日付をクリックして別日の天気予報を取得していく
+# 2～8日目のデータ天気を取得
 # for element in driver.find_elements_by_css_selector('#navCal a'): ←修正前
 for day in range(2, 9):
     element = driver.find_element_by_css_selector('#navCal > li:nth-child({0})'.format(day))
+    print(time.time())
     element.click()
-    time.sleep(1)
+
+    # クリックした日付が青くなる(aタグが消えて、spanにcurrentというクラスが付く)まで待つ
+    print(time.time())
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#navCal > li:nth-child({0}) > span.current'.format(day))))
+    print(time.time())
+
     print_weather(driver.page_source)
+    print("------------------")
 
 # ブラウザを閉じる
 driver.close()
