@@ -50,16 +50,11 @@ print_weather(driver.page_source)
 # for element in driver.find_elements_by_css_selector('#navCal a'): ←修正前
 for day in range(2, 9):
     element = driver.find_element_by_css_selector('#navCal > li:nth-child({0})'.format(day))
-    print(time.time())
     element.click()
 
-    # クリックした日付が青くなる(aタグが消えて、spanにcurrentというクラスが付く)まで待つ
-    print(time.time())
+    # クリックした日付が青くなる(aタグが消えて、spanにcurrentというクラスが付く)まで待機してから天気情報を出力する処理を呼び出す
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#navCal > li:nth-child({0}) > span.current'.format(day))))
-    print(time.time())
-
     print_weather(driver.page_source)
-    print("------------------")
 
 # ブラウザを閉じる
 driver.close()
