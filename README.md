@@ -1,6 +1,15 @@
 # python-webscraping-practice
 作ったプログラムについて
 
+## インストール、起動
+```
+git clone https://github.com/imo-tikuwa/python-webscraping-practice
+cd python-webscraping-practice
+.\venv\Scripts\activate.bat
+pip install -r requirements.txt
+python app1.rb
+```
+
 ## app1.py
 beautifulsoup4でヤフー天気の地図を1日分スクレイピングするサンプルプログラム  
 
