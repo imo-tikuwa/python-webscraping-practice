@@ -87,6 +87,7 @@ while (True):
         break
 
     # 次のページ番号を元にXPathでクリックしたいaタグを取得
+    # Xpathの指定ならテキストが〇〇みたいな要素を取得できる
     next_page_num = int(active_page_num) + 1
     next_page_btn = driver.find_element_by_xpath("//ul[@class='pagination']/li/a[contains(text(), '{0}')]".format(next_page_num))
     if (next_page_btn is not None):
